@@ -32,14 +32,17 @@ function rgbToHex(r, g, b) {
   return hex.length < 6 ? hex.padStart(6, "0") : hex
 }
 
-function showColors (h, s, b) {
+function showColors (hue, saturation, brightness) {
+  let h = Number.parseFloat(hue)
+  let s = Number.parseFloat(saturation)
+  let b = Number.parseFloat(brightness)
   let results = document.getElementById('results')
   let colorList = []
   colorList.push(hsbToRgb(h, s, b))
-  colorList.push(hsbToRgb(h + 30, s, b))
-  colorList.push(hsbToRgb(h - 30, s, b))
-  colorList.push(hsbToRgb(Math.abs(h - 180) + 25, s, b))
-  colorList.push(hsbToRgb(Math.abs(h - 180) - 25, s, b))
+  colorList.push(hsbToRgb((h + 30) % 360, s, b))
+  colorList.push(hsbToRgb((h - 30 + 360) % 360, s, b))
+  colorList.push(hsbToRgb((h + 180 + 25) % 360, s, b))
+  colorList.push(hsbToRgb((h + 180 - 25) % 360, s, b))
 
   Array.from(results.getElementsByClassName('color-item')).forEach(function(item) {
     let colorRGB = colorList.shift()
