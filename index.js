@@ -34,16 +34,18 @@ function rgbToHex(r, g, b) {
 
 function showColors (h, s, b) {
   let results = document.getElementById('results')
-  let colorHexList = []
-  colorHexList.push(rgbToHex(...hsbToRgb(h, s, b)))
-  colorHexList.push(rgbToHex(...hsbToRgb(h + 30, s, b)))
-  colorHexList.push(rgbToHex(...hsbToRgb(h - 30, s, b)))
-  colorHexList.push(rgbToHex(...hsbToRgb(Math.abs(h - 180) + 25, s, b)))
-  colorHexList.push(rgbToHex(...hsbToRgb(Math.abs(h - 180) - 25, s, b)))
+  let colorList = []
+  colorList.push(hsbToRgb(h, s, b))
+  colorList.push(hsbToRgb(h + 30, s, b))
+  colorList.push(hsbToRgb(h - 30, s, b))
+  colorList.push(hsbToRgb(Math.abs(h - 180) + 25, s, b))
+  colorList.push(hsbToRgb(Math.abs(h - 180) - 25, s, b))
 
   Array.from(results.getElementsByClassName('color-item')).forEach(function(item) {
-    let colorHex = colorHexList.shift()
+    let colorRGB = colorList.shift()
+    let colorHex = rgbToHex(...colorRGB)
     item.getElementsByClassName('color-block')[0].style.backgroundColor = '#' + colorHex
-    item.getElementsByClassName('color-hex-value')[0].innerText = colorHex.toUpperCase()
+    item.getElementsByClassName('color-hex')[0].innerText = colorHex.toUpperCase()
+    item.getElementsByClassName('color-rgb')[0].innerText = colorRGB.join(', ')
   })
 }
