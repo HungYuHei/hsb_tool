@@ -10,16 +10,19 @@
   margin-right: 15px;
 }
 
+.color-item {
+  margin: 5px 0;
+}
+
 .color-item span {
-  margin-left: 20px;
+  display: inline-block;
+  min-width: 80px;
 }
 
 .color-item .color-block {
-  display: inline-block;
   width: 5em;
   height: 1em;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  margin-right: 10px;
 }
 .color-item .color-hex:before {
   content: '#'
