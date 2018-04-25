@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.input-group-inline {
+  display: flex;
+}
+.input-group-wrapper {
+  margin-right: 15px;
+}
+
+.color-item .color-block {
+  display: inline-block;
+  width: 5em;
+  height: 1em;
+  margin: 0 1em;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}

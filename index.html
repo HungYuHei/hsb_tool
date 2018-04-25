@@ -8,6 +8,59 @@
     </head>
     <body>
         <div class="container">
+            <div class="input-group-inline">
+                <div class="input-group-wrapper">
+                    <label for="hue-input">Hue</label>
+                    <input id="hue-input" type="number" name="" />
+                </div>
+                <div class="input-group-wrapper">
+                    <label for="saturation-input">Saturation</label>
+                    <input id="saturation-input" type="number" name="" />
+                </div>
+                <div class="input-group-wrapper">
+                    <label for="brightness-input">Brightness</label>
+                    <input id="brightness-input" type="number" name="" />
+                </div>
+                <div class="input-group-wrapper">
+                    <input id="submit-btn" type="submit" value="导出类似色">
+                </div>
+            </div>
+            <hr>
+            <div id="results">
+                <div class="color-item">
+                    <span>基准色</span>
+                    <span class="color-block"></span>
+                    <span class="color-hex-value">-</span>
+                </div>
+                <div class="color-item">
+                    <span>类似色</span>
+                    <span class="color-block"></span>
+                    <span class="color-hex-value">-</span>
+                </div>
+                <div class="color-item">
+                    <span>类似色</span>
+                    <span class="color-block"></span>
+                    <span class="color-hex-value">-</span>
+                </div>
+                <div class="color-item">
+                    <span>对比色</span>
+                    <span class="color-block"></span>
+                    <span class="color-hex-value">-</span>
+                </div>
+                <div class="color-item">
+                    <span>对比色</span>
+                    <span class="color-block"></span>
+                    <span class="color-hex-value">-</span>
+                </div>
+            </div>
         </div>
     </body>
+
+    <script>
+      let hueInput = document.getElementById('hue-input')
+      let saturationInput = document.getElementById('saturation-input')
+      let brightnessInput = document.getElementById('brightness-input')
+      let submitBtn = document.getElementById('submit-btn')
+      submitBtn.onclick = function() { showColors(hueInput.value, saturationInput.value, brightnessInput.value) }
+    </script>
 </html>

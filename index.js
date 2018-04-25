@@ -1,4 +1,4 @@
-function hsb2rgb(hue, saturation, brightness) {
+function hsbToRgb(hue, saturation, brightness) {
   let h = Number.parseFloat(hue)
   let s = Number.parseFloat(saturation) / 100
   let v = Number.parseFloat(brightness) / 100
@@ -26,4 +26,31 @@ function hsb2rgb(hue, saturation, brightness) {
   }
 
   return rgb.map(i => Math.trunc(i * 255))
+}
+
+function rgbToHex(r, g, b) {
+  return toHex(r) + toHex(g) + toHex(b)
+}
+
+function toHex(n) {
+ n = Number.parseInt(n)
+ if (isNaN(n)) return "00"
+ n = Math.max(0, Math.min(n, 255))
+ return "0123456789ABCDEF".charAt((n - n % 16) / 16) + "0123456789ABCDEF".charAt(n % 16)
+}
+
+function showColors (h, s, b) {
+  let results = document.getElementById('results')
+  let colorHexList = []
+  colorHexList.push(rgbToHex(...hsbToRgb(h, s, b)))
+  colorHexList.push(rgbToHex(...hsbToRgb(h + 30, s, b)))
+  colorHexList.push(rgbToHex(...hsbToRgb(h - 30, s, b)))
+  colorHexList.push(rgbToHex(...hsbToRgb(Math.abs(h - 180) + 25, s, b)))
+  colorHexList.push(rgbToHex(...hsbToRgb(Math.abs(h - 180) - 25, s, b)))
+
+  Array.from(results.getElementsByClassName('color-item')).forEach(function(item) {
+    let colorHex = colorHexList.shift()
+    item.getElementsByClassName('color-block')[0].style = "background-color: #" + colorHex
+    item.getElementsByClassName('color-hex-value')[0].innerText = colorHex
+  })
 }
