@@ -49,3 +49,13 @@ function showColors (h, s, b) {
     item.getElementsByClassName('color-rgb')[0].innerText = colorRGB.join(', ')
   })
 }
+
+window.onload = function() {
+  let hueInput = document.getElementById('hue-input')
+  let saturationInput = document.getElementById('saturation-input')
+  let brightnessInput = document.getElementById('brightness-input')
+
+  document.getElementById('submit-btn').onclick = function() {
+    showColors(hueInput.value, saturationInput.value, brightnessInput.value)
+  }
+}
