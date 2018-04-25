@@ -3,40 +3,33 @@ function hsbToRgb(hue, saturation, brightness) {
   let s = Number.parseFloat(saturation) / 100
   let v = Number.parseFloat(brightness) / 100
 
-  let _h = h % 6
-  let f = h / 60 - _h
-  let p = v * (1 - s)
-  let q = v * (1 - f * s)
-  let t = v * (1 - (1-f) * s)
+  let C = v * s;
+  let hh = h / 60;
+  let X = C * (1 - Math.abs(hh % 2 - 1));
+
   let rgb = null
 
-  switch (_h) {
-    case 0:
-      rgb = [v, t, p]; break;
-    case 1:
-      rgb = [q, v, p]; break;
-    case 2:
-      rgb = [p, v, t]; break;
-    case 3:
-      rgb = [p, q, v]; break;
-    case 4:
-      rgb = [t, p, v]; break;
-    case 5:
-      rgb = [v, p, q]; break;
+  if (hh >= 0 && hh < 1) {
+    rgb = [C, X, 0]
+  } else if (hh >= 1 && hh < 2) {
+    rgb = [X, C, 0]
+  } else if (hh >= 2 && hh < 3) {
+    rgb = [0, C, X]
+  } else if (hh >= 3 && hh < 4) {
+    rgb = [0, X, C]
+  } else if (hh >= 4 && hh < 5) {
+    rgb = [X, 0, C]
+  } else {
+    rgb = [C, 0, X]
   }
 
-  return rgb.map(i => Math.trunc(i * 255))
+  m = v - C;
+  return rgb.map(i => Math.trunc((i + m) * 255))
 }
 
 function rgbToHex(r, g, b) {
-  return toHex(r) + toHex(g) + toHex(b)
-}
-
-function toHex(n) {
- n = Number.parseInt(n)
- if (isNaN(n)) return "00"
- n = Math.max(0, Math.min(n, 255))
- return "0123456789ABCDEF".charAt((n - n % 16) / 16) + "0123456789ABCDEF".charAt(n % 16)
+  let hex = (r * 65536 + g * 256 + b).toString(16, 6)
+  return hex.length < 6 ? hex.padStart(6, "0") : hex
 }
 
 function showColors (h, s, b) {
@@ -50,7 +43,7 @@ function showColors (h, s, b) {
 
   Array.from(results.getElementsByClassName('color-item')).forEach(function(item) {
     let colorHex = colorHexList.shift()
-    item.getElementsByClassName('color-block')[0].style = "background-color: #" + colorHex
-    item.getElementsByClassName('color-hex-value')[0].innerText = colorHex
+    item.getElementsByClassName('color-block')[0].style.backgroundColor = '#' + colorHex
+    item.getElementsByClassName('color-hex-value')[0].innerText = colorHex.toUpperCase()
   })
 }
