@@ -28,8 +28,8 @@
   content: '#'
 }
 .color-item .color-rgb:before {
-  content: 'RGB('
+  content: 'RGB(';
 }
 .color-item .color-rgb:after {
-  content: ')'
+  content: ')';
 }
